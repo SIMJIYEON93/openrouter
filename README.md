@@ -51,4 +51,21 @@
 |                |   "maxTokens": 150                                                      |
 |                | }                                                                       |
 
+```
+Method: POST
+URL: https://api.openrouter.ai/v1/chat/completions
+Headers:
+  - Content-Type: application/json
+  - Authorization: Bearer <YOUR_OPENROUTER_API_KEY>
+Body:
+{
+  "model": "anthropic.claude-v2",
+  "messages": [
+    { "role": "user", "content": "다음 글을 초등학생이 이해할 수 있도록 쉽게 바꿔줘:\n
+    양자 물리학의 기본 개념을 설명해 주세요." }
+  ],
+  "max_tokens": 150
+}
+```
+
 단, 스트리밍 응답 테스트 할때는 "Send and Download" 또는 "Raw Data Preview" 옵션을 사용해야 합니다
