@@ -34,3 +34,19 @@
 ### 빌드 및 실행 환경
 - JDK 17 이상
 - Gradle 7.x 이상
+- 
+
+
+### Postman 요청 예시
+
+| **필드**       | **값**                                                                          |
+|----------------|---------------------------------------------------------------------------------|
+| **Method**     | `POST`                                                                         |
+| **URL**        | `http://localhost:8080/api/v1/openai/translate`                                |
+| **Headers**    | `Content-Type: application/json`                                               |
+|                | `Authorization: Bearer <OPENROUTER_API_KEY>`                              |
+| **Body (JSON)**| ```json                                                                        |
+|                | {                                                                             |
+|                |   "prompt": "양자 물리학의 기본 개념을 설명해 주세요.",                          |
+|                |   "maxTokens": 150                                                           |
+|                | }                                                                             |
