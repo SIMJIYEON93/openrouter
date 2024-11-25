@@ -1,6 +1,6 @@
                # Open Router
 
-이 프로젝트는 OpenRouter을 사용해서 다양한 aiapi를 호출 할수 있도록 만든 프로젝트 입니다.
+이 프로젝트는 OpenRouter을 사용해서 다양한 aiapi(claude)를 호출 할수 있도록 만든 프로젝트 입니다.
 
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=spring-boot)

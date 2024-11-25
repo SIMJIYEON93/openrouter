@@ -19,7 +19,6 @@ public class AiApiController {
 
     @PostMapping("/translate")
     public Mono<String> translate(@RequestBody TranslationRequest request) {
-        // 요청 유효성 검사
         if (request.getPrompt() == null || request.getPrompt().isEmpty()) {
             return Mono.error(new IllegalArgumentException("Prompt must not be null or empty."));
         }
@@ -27,13 +26,11 @@ public class AiApiController {
             return Mono.error(new IllegalArgumentException("MaxTokens must be greater than 0."));
         }
 
-        // 서비스 계층에 요청 위임
         return aiApiService.translate(request.getPrompt(), request.getMaxTokens());
     }
 
     @PostMapping("/translate/stream")
     public Flux<String> translateStream(@RequestBody TranslationRequest request) {
-        // 요청 유효성 검사
         if (request.getPrompt() == null || request.getPrompt().isEmpty()) {
             return Flux.error(new IllegalArgumentException("Prompt must not be null or empty."));
         }
@@ -41,8 +38,8 @@ public class AiApiController {
             return Flux.error(new IllegalArgumentException("MaxTokens must be greater than 0."));
         }
 
-        // 서비스 계층에 요청 위임
         return aiApiService.translateStream(request.getPrompt(), request.getMaxTokens());
     }
 }
+
 

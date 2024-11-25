@@ -27,8 +27,8 @@ public class AiApiService {
         Instant start = Instant.now();
 
         return webClient.post()
-                .uri("/chat/completions")
-                .bodyValue(request.toApiRequest())
+                .uri("")
+                .bodyValue(request.toApiRequest().toString())
                 .retrieve()
                 .bodyToMono(String.class)
                 .doOnSubscribe(subscription -> logger.info("translate() request started at: {}", start))
@@ -44,8 +44,8 @@ public class AiApiService {
         Instant start = Instant.now();
 
         return webClient.post()
-                .uri("/chat/completions")
-                .bodyValue(request.toApiRequest())
+                .uri("")
+                .bodyValue(request.toApiRequest().toString())
                 .retrieve()
                 .bodyToFlux(String.class)
                 .doOnSubscribe(subscription -> logger.info("translateStream() request started at: {}", start))
@@ -56,4 +56,6 @@ public class AiApiService {
                 });
     }
 }
+
+
 
