@@ -39,14 +39,16 @@
 
 ### Postman 요청 예시
 
-| **필드**       | **값**                                                                          |
-|----------------|---------------------------------------------------------------------------------|
-| **Method**     | `POST`                                                                         |
-| **URL**        | `http://localhost:8080/api/v1/openai/translate`                                |
-| **Headers**    | `Content-Type: application/json`                                               |
-|                | `Authorization: Bearer <OPENROUTER_API_KEY>`                              |
-| **Body (JSON)**| ```json                                                                        |
-|                | {                                                                             |
+| **필드**       | **값**                                                                   |
+|----------------|--------------------------------------------------------------------------|
+| **Method**     | `POST`                                                                  |
+| **URL**        | `http://localhost:8080/api/v1/openai/translate`                         |
+| **Headers**    | `Content-Type: application/json`                                        |
+|                | `Authorization: Bearer <OPENROUTER_API_KEY>`                            |
+| **Body (JSON)**|                                                                         |
+|                | {                                                                       |
 |                |   "prompt": "양자 물리학의 기본 개념을 설명해 주세요.",                          |
-|                |   "maxTokens": 150                                                           |
-|                | }                                                                             |
+|                |   "maxTokens": 150                                                      |
+|                | }                                                                       |
+
+단, 스트리밍 응답 테스트 할때는 "Send and Download" 또는 "Raw Data Preview" 옵션을 사용해야 합니다
