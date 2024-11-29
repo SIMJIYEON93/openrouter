@@ -15,7 +15,6 @@ import java.time.Instant;
 public class AiApiService {
 
     private static final Logger logger = LoggerFactory.getLogger(AiApiService.class);
-
     private final WebClient webClient;
 
     public AiApiService(WebClient webClient) {
@@ -27,8 +26,8 @@ public class AiApiService {
         Instant start = Instant.now();
 
         return webClient.post()
-                .uri("")
-                .bodyValue(request.toApiRequest().toString())
+                .uri("/chat/completions")
+                .bodyValue(request.toApiRequest()) // 직렬화 가능한 객체 전달
                 .retrieve()
                 .bodyToMono(String.class)
                 .doOnSubscribe(subscription -> logger.info("translate() request started at: {}", start))
@@ -44,8 +43,8 @@ public class AiApiService {
         Instant start = Instant.now();
 
         return webClient.post()
-                .uri("")
-                .bodyValue(request.toApiRequest().toString())
+                .uri("/chat/completions")
+                .bodyValue(request.toApiRequest())
                 .retrieve()
                 .bodyToFlux(String.class)
                 .doOnSubscribe(subscription -> logger.info("translateStream() request started at: {}", start))
