@@ -38,17 +38,18 @@
 
 ### Postman 요청 예시
 
-| **필드**       | **값**                                                                   |
-|----------------|--------------------------------------------------------------------------|
-| **Method**     | `POST`                                                                  |
-| **URL**        | `http://localhost:8080/api/v1/openai/translate`                         |
-| **Headers**    | `Content-Type: application/json`                                        |
-|                | `Authorization: Bearer <OPENROUTER_API_KEY>`                            |
-| **Body (JSON)**|                                                                         |
-|                | {                                                                       |
-|                |   "prompt": "양자 물리학의 기본 개념을 설명해 주세요.",                          |
-|                |   "maxTokens": 150                                                      |
-|                | }                                                                       |
+| **필드**       | **값**                                           |
+|----------------|-------------------------------------------------|
+| **Method**     | `POST`                                          |
+| **URL**        | `http://localhost:8080/api/v1/openai/translate` |
+| **Headers**    | `Content-Type: application/json`                |
+|                | `Authorization: Bearer <OPENROUTER_API_KEY>`    |
+| **Body (JSON)**|                                                 |
+|                | {                                               |
+|                | "prompt": "양자 물리학의 기본 개념을 설명해 주세요.",            |
+|                | "temperature": 1.0,                             |
+|                | "topP": 0.9                                     |
+|                | }                                               |
 
 ```
 Method: POST
@@ -63,7 +64,8 @@ Body:
     { "role": "user", "content": "다음 글을 초등학생이 이해할 수 있도록 쉽게 바꿔줘:\n
     양자 물리학의 기본 개념을 설명해 주세요." }
   ],
-  "max_tokens": 150
+  "temperature": 1.0,
+  "topP": 0.9
 }
 ```
 
@@ -89,10 +91,10 @@ Body:
 
 ---
 
-![Stream 첫번째 데이터 도착시간](images/stream.png)
-![Stream First request time](images/streamrequesttime.png)
-![Stream First response time](images/streamresponsetime.png)
-![Mono Time to first byte](images/mono.png)
-![Mono First request time](images/monorequesttime.png)
-![Mono First response time](images/monoresponsetime.png)
-![번안 결과](images/result.png)
+![Stream 첫번째 데이터 도착시간](./images/stream.png)
+![Stream First request time](./images/streamrequesttime.png)
+![Stream First response time](./images/streamresponsetime.png)
+![Mono Time to first byte](./images/mono.png)
+![Mono First request time](./images/monorequesttime.png)
+![Mono First response time](./images/monoresponsetime.png)
+![번안 결과](./images/result.png)
