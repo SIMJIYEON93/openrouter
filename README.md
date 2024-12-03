@@ -77,12 +77,22 @@ Body:
 **기준 번안글**: [https://www.yna.co.kr/view/AKR20241203051751004?section=search](https://www.yna.co.kr/view/AKR20241203051751004?section=search)  
 기준 번안글은 띄어쓰기 포함 **1,162자**입니다.
 
+### **첫번째 데이터 도착 시간**
+- **스트림**: 2.599초
+- **모노**: 9.269
+
+대략적으로 모노형식은 스트림의 4배 정도의 시간 차이
+
 ### **처리 속도**
 - **스트림**: 9.556초
 - **모노**: 9.745초
 
 ---
 
-![Stream 테스트 결과](./images/stream.png)
-![Mono 테스트 결과](./images/mono.png)
-![Mono 테스트 결과](./images/monoresult.png)
+![Stream 첫번째 데이터 도착시간](images/stream.png)
+![Stream First request time](images/streamrequesttime.png)
+![Stream First response time](images/streamresponsetime.png)
+![Mono Time to first byte](images/mono.png)
+![Mono First request time](images/monorequesttime.png)
+![Mono First response time](images/monoresponsetime.png)
+![번안 결과](images/result.png)
