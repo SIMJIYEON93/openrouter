@@ -36,7 +36,6 @@ public class WebClientConfig {
             throw new IllegalStateException("OpenRouter API Key is not configured");
         }
 
-        // TCP 및 HTTP 클라이언트 설정
         TcpClient tcpClient = TcpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
                 .doOnConnected(connection -> connection
@@ -48,7 +47,6 @@ public class WebClientConfig {
 
         logger.info("Initializing WebClient with base URL: {}", openrouterApiUrl);
 
-        // WebClient 생성
         return WebClient.builder()
                 .baseUrl(openrouterApiUrl)
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
