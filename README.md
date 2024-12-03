@@ -96,5 +96,4 @@ Body:
 ![Stream First response time](./images/streamresponsetime.png)
 ![Mono Time to first byte](./images/mono.png)
 ![Mono First request time](./images/monorequesttime.png)
-![Mono First response time](./images/monoresponsetime.png)
 ![번안 결과](./images/result.png)
