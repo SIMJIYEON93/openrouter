@@ -27,10 +27,8 @@ public class TranslationRequest {
         // 요청 데이터를 순서 보장
         Map<String, Object> request = new LinkedHashMap<>();
 
-        // 모델 추가
         request.put("model", "anthropic/claude-3.5-haiku-20241022");
 
-        // 메시지 구성
         List<Map<String, String>> messages = new ArrayList<>();
         messages.add(new LinkedHashMap<>() {{
             put("role", "user");
