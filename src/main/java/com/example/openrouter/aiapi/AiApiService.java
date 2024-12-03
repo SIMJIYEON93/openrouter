@@ -27,9 +27,7 @@ public class AiApiService {
         this.webClient = webClient;
     }
 
-    /**
-     * Translate method with additional parameters for temperature and topP.
-     */
+
     public Mono<String> translate(String prompt, Double temperature, Double topP) {
         TranslationRequest request = new TranslationRequest(prompt, temperature, topP);
         Instant start = Instant.now();
@@ -67,9 +65,7 @@ public class AiApiService {
                 .doOnError(error -> logger.error("Error occurred: {}", error.getMessage()));
     }
 
-    /**
-     * Stream-based translation method with additional parameters for temperature and topP.
-     */
+
     public Flux<String> translateStream(String prompt, Double temperature, Double topP) {
         TranslationRequest request = new TranslationRequest(prompt, temperature, topP);
         Instant start = Instant.now();
