@@ -1,6 +1,5 @@
 package com.example.openrouter.aiapi;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ public class AiApiService {
     private static final Logger logger = LoggerFactory.getLogger(AiApiService.class);
     private final WebClient webClient;
 
-    public AiApiService(@Qualifier("openRouterWebClient")WebClient webClient) {
+    public AiApiService(@Qualifier("openRouterWebClient") WebClient webClient) {
         if (webClient == null) {
             logger.error("WebClient is null!");
         } else {
@@ -32,28 +31,34 @@ public class AiApiService {
      * Translate method with additional parameters for temperature and topP.
      */
     public Mono<String> translate(String prompt, Double temperature, Double topP) {
-        // TranslationRequest 객체 생성
         TranslationRequest request = new TranslationRequest(prompt, temperature, topP);
         Instant start = Instant.now();
+        final boolean[] firstResponseLogged = {false}; // 첫 응답 여부를 추적
 
-
-        // jsonPayload 변수 선언
         String jsonPayload = null;
         try {
             jsonPayload = new ObjectMapper().writeValueAsString(request.toApiRequest());
-            logger.info("Request Payload: {}", jsonPayload); // JSON 디버깅용
+            logger.info("Request Payload: {}", jsonPayload);
         } catch (Exception e) {
             logger.error("Error serializing request payload: {}", e.getMessage());
             return Mono.error(e);
         }
 
-        // WebClient를 사용해 요청 전송
         return webClient.post()
                 .uri("/chat/completions")
-                .bodyValue(request.toApiRequest()) // 직렬화된 요청 본문
+                .bodyValue(request.toApiRequest())
                 .retrieve()
                 .bodyToMono(String.class)
                 .doOnSubscribe(subscription -> logger.info("translate() request started at: {}", start))
+                .doOnNext(response -> {
+                    if (!firstResponseLogged[0]) {
+                        firstResponseLogged[0] = true;
+                        Instant firstResponseReceived = Instant.now();
+                        logger.info("First Response Received at: {}", firstResponseReceived);
+                        logger.info("Time to first byte: {} ms",
+                                Duration.between(start, firstResponseReceived).toMillis());
+                    }
+                })
                 .doOnSuccess(response -> {
                     Instant end = Instant.now();
                     logger.info("translate() request completed at: {}", end);
@@ -66,34 +71,40 @@ public class AiApiService {
      * Stream-based translation method with additional parameters for temperature and topP.
      */
     public Flux<String> translateStream(String prompt, Double temperature, Double topP) {
-        // TranslationRequest 객체 생성
         TranslationRequest request = new TranslationRequest(prompt, temperature, topP);
         Instant start = Instant.now();
+        final boolean[] firstResponseLogged = {false}; // 첫 응답 여부를 추적
 
-        // 요청 페이로드 로깅
-        String jsonPayload = null; // 블록 외부에서 선언
+        String jsonPayload = null;
         try {
             jsonPayload = new ObjectMapper().writeValueAsString(request.toApiRequest());
-            logger.info("Request Payload: {}", jsonPayload); // 디버깅용
+            logger.info("Request Payload: {}", jsonPayload);
         } catch (Exception e) {
             logger.error("Error serializing request payload: {}", e.getMessage());
-            return Flux.error(e); // 또는 Mono.error(e)
+            return Flux.error(e);
         }
 
-
-        // WebClient를 사용해 스트리밍 요청 전송
         return webClient.post()
                 .uri("/chat/completions")
                 .bodyValue(request.toApiRequest())
                 .retrieve()
                 .bodyToFlux(String.class)
-                .doOnNext(response -> logger.info("Received chunk: {}", response))
-                .doOnError(error -> logger.error("Error occurred: {}", error.getMessage()))
                 .doOnSubscribe(subscription -> logger.info("translateStream() request started at: {}", start))
+                .doOnNext(response -> {
+                    if (!firstResponseLogged[0]) {
+                        firstResponseLogged[0] = true;
+                        Instant firstResponseReceived = Instant.now();
+                        logger.info("First Response Received at: {}", firstResponseReceived);
+                        logger.info("Time to first byte: {} ms",
+                                Duration.between(start, firstResponseReceived).toMillis());
+                    }
+                    logger.info("Received chunk: {}", response);
+                })
                 .doOnComplete(() -> {
                     Instant end = Instant.now();
                     logger.info("translateStream() request completed at: {}", end);
                     logger.info("translateStream() took: {} ms", Duration.between(start, end).toMillis());
-                });
+                })
+                .doOnError(error -> logger.error("Error occurred: {}", error.getMessage()));
     }
 }
