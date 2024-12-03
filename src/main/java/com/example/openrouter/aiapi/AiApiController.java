@@ -22,11 +22,11 @@ public class AiApiController {
         if (request.getPrompt() == null || request.getPrompt().isEmpty()) {
             return Mono.error(new IllegalArgumentException("Prompt must not be null or empty."));
         }
-        if (request.getMaxTokens() <= 0) {
+      /*  if (request.getMaxTokens() <= 0) {
             return Mono.error(new IllegalArgumentException("MaxTokens must be greater than 0."));
-        }
+        }*/
 
-        return aiApiService.translate(request.getPrompt(), request.getMaxTokens());
+        return aiApiService.translate(request.getPrompt(), request.getTemperature(), request.getTopP());
     }
 
     @PostMapping("/translate/stream")
@@ -34,11 +34,11 @@ public class AiApiController {
         if (request.getPrompt() == null || request.getPrompt().isEmpty()) {
             return Flux.error(new IllegalArgumentException("Prompt must not be null or empty."));
         }
-        if (request.getMaxTokens() <= 0) {
+        /*if (request.getMaxTokens() <= 0) {
             return Flux.error(new IllegalArgumentException("MaxTokens must be greater than 0."));
-        }
+        }*/
 
-        return aiApiService.translateStream(request.getPrompt(), request.getMaxTokens());
+        return aiApiService.translateStream(request.getPrompt(), request.getTemperature(), request.getTopP());
     }
 }
 

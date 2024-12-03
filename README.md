@@ -1,6 +1,6 @@
 ## Open Router
 
-이 프로젝트는 OpenRouter을 사용해서 다양한 aiapi(claude)를 호출 할수 있도록 만든 프로젝트 입니다.
+이 프로젝트는 OpenRouter을 사용해서 다양한 aiapi(claude-3.5)를 호출 할수 있도록 만든 프로젝트 입니다.
 
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=spring-boot)
@@ -68,3 +68,21 @@ Body:
 ```
 
 단, 스트리밍 응답 테스트 할때는 "Send and Download" 또는 "Raw Data Preview" 옵션을 사용해야 합니다
+
+
+---
+
+## 테스트 결과
+
+**기준 번안글**: [https://www.yna.co.kr/view/AKR20241203051751004?section=search](https://www.yna.co.kr/view/AKR20241203051751004?section=search)  
+기준 번안글은 띄어쓰기 포함 **1,162자**입니다.
+
+### **처리 속도**
+- **스트림**: 9.556초
+- **모노**: 9.745초
+
+---
+
+![Stream 테스트 결과](./images/stream.png)
+![Mono 테스트 결과](./images/mono.png)
+![Mono 테스트 결과](./images/monoresult.png)
